@@ -10,14 +10,15 @@ namespace PierresTreats.Controllers
     {
         private readonly PierresTreatsContext _dbContext;
 
-        public TreatsController(PierresTreatsContext db)
-        {
-            _db = db;
-        }
+        // public TreatsController(PierresTreatsContext db)
+        // {
+        //     _db = db;
+        // }
         public ActionResult Index()
         {
-            List<Treats> model = _db.Treats.ToList();
-            return View(model);
+            // List<Treat> model = _db.Treats.ToList();
+            // return View(model);
+            return View();
         }
 
         public ActionResult Create()
@@ -28,8 +29,8 @@ namespace PierresTreats.Controllers
         [HttpPost]
         public ActionResult Create(Treat treat)
         {
-            _db.Treats.Add(treat);
-            _db.SaveChanges();
+            // _db.Treats.Add(treat);
+            // _db.SaveChanges();
             return RedirectToAction("Index");
         }
     }

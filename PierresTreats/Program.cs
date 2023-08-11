@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using PierresTreats.Models;
@@ -21,17 +22,28 @@ namespace PierresTreats
                               )
                             );
 
-            WebApplication app = builder.Build();
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<PierresTreatsContext>()
+                .AddDefaultTokenProviders();
 
-            app.UseRouting();
+      WebApplication app = builder.Build();
 
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+      // app.UseDeveloperExceptionPage();
+      app.UseHttpsRedirection();
+      app.UseStaticFiles();
 
-            app.Run();
-        }
+      app.UseRouting();
+
+      // New code below!
+      app.UseAuthentication(); 
+      app.UseAuthorization();
+
+      app.MapControllerRoute(
+          name: "default",
+          pattern: "{controller=Home}/{action=Index}/{id?}"
+        );
+
+      app.Run();
     }
+  }
 }
