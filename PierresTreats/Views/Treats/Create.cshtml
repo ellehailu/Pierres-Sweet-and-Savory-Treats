@@ -1,0 +1,18 @@
+@{
+    Layout = "_Layout";
+} 
+
+@model PierresTreats.Models.Treat;
+
+@using (Html.BeginForm())
+{
+    <h1>Add a new treat</h1>
+    <label for="Name">Treat name</label>
+    @Html.TextBoxFor(m=>m.Name)<br>
+//Add checkboxes
+    <label for="Allergens">Allergens</label>
+    @Html.TextBoxFor(m=>m.Allergens)<br>
+    <input type="submit" value="Add"/>
+}
+
+@Html.ActionLink("Treat list", "Index")
