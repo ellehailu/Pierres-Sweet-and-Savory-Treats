@@ -1,6 +1,6 @@
 namespace PierresTreats.Models
 {
-    public class Treat
+    public class TreatFlavor
     {
 
     }
