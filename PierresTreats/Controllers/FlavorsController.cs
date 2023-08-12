@@ -2,6 +2,8 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using PierresTreats.Models;
 
 namespace PierresTreats.Controllers
@@ -33,14 +35,26 @@ namespace PierresTreats.Controllers
         [HttpPost]
         public ActionResult Create(Flavor flavor)
         {
-            _db.Flavors.Add(flavor);
-            _db.SaveChanges();
-            return RedirectToAction("Index");
+            //check if model state is valid
+            if (ModelState.IsValid)
+            {
+                _db.Flavors.Add(flavor);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Name");
+                return View(flavor);
+            }
+
         }
 
         public ActionResult Details(int id)
         {
-            Flavor thisFlavor = _db.Flavors.FirstOrDefault(flavor => flavor.FlavorId == id);
+            Flavor thisFlavor = _db.Flavors
+                                .Include(flavor => flavor.JoinEntities)
+                                .ThenInclude(join => join.Treat).FirstOrDefault(flavor => flavor.FlavorId == id);
             return View(thisFlavor);
         }
 
@@ -72,5 +86,7 @@ namespace PierresTreats.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        //AddTreat()
     }
 }
