@@ -1,10 +1,12 @@
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PierresTreats.Models;
 
 namespace PierresTreats.Controllers
 {
+    [Authorize]
     public class FlavorsController : Controller
     {
         private readonly PierresTreatsContext _db;
@@ -16,6 +18,7 @@ namespace PierresTreats.Controllers
             _db = db;
         }
 
+        [AllowAnonymous]
         public ActionResult Index()
         {
             List<Flavor> model = _db.Flavors.ToList();
