@@ -1,0 +1,19 @@
+@{
+    Layout = "_Layout";
+} 
+
+@model PierresTreats.Models.Treat;
+
+@using (Html.BeginForm()){
+    @Html.HiddenFor(m => m.TreatId)
+
+    @Html.DisplayNameFor(m => m.Name)
+    @Html.EditorFor(m => m.Name)
+
+    @Html.DisplayNameFor(m=>m.Allergens)
+    @Html.EditorFor(m=>m.Allergens)
+
+    <input type="submit" value="Edit details" />
+}
+
+@Html.ActionLink("Back to list", "Index")
