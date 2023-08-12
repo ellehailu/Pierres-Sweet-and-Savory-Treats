@@ -1,0 +1,16 @@
+@{
+    Layout = "_Layout";
+} 
+
+@model PierresTreats.Models.Flavor
+
+@using (Html.BeginForm()){
+    @Html.HiddenFor(m=>m.FlavorId)
+    @Html.LabelFor(m=>m.Name)
+    @Html.EditorFor(m=>m.Name)
+
+    <input type="submit" value="update" />
+}
+
+@Html.ActionLink("return to list", "Index")
+
