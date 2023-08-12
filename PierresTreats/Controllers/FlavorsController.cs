@@ -87,6 +87,22 @@ namespace PierresTreats.Controllers
             return RedirectToAction("Index");
         }
 
-        //AddTreat()
+        public ActionResult AddTreat(int id)
+        {
+            Flavor thisFlavor = _db.Flavors.FirstOrDefault(flavors => flavors.FlavorId == id);
+            return View(thisFlavor);
+        }
+
+        [HttpPost]
+        public ActionResult AddTreat(Flavor flavor, int treatId)
+        {
+            TreatFlavor? joinEntity = _db.TreatFlavors.FirstOrDefault(join => join.FlavorId == treatId && join.FlavorId == flavor.FlavorId);
+            if (joinEntity == null && treatId != 0)
+            {
+                _db.TreatFlavors.Add(new TreatFlavor() { TreatId = treatId, FlavorId = flavor.FlavorId });
+                _db.SaveChanges();
+            }
+            return RedirectToAction("Details", new { id = flavor.FlavorId });
+        }
     }
 }

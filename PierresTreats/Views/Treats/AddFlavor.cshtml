@@ -1,0 +1,25 @@
+@{
+    Layout = "_Layout";
+}
+
+@model PierresTreats.Models.Treat
+
+<h4>Add a flavor</h4>
+
+@using (Html.BeginForm()){
+    @Html.HiddenFor(m=>m.TreatId)
+
+    @Html.Label("Select a flavor")
+
+    @if (ViewBag.FlavorId != null && ((IEnumerable<SelectListItem>)ViewBag.TreatId).Any())
+    {
+        @Html.Label("Select flavor")
+        @Html.DropDownList("FlavorId", ViewBag.FlavorId as IEnumerable<SelectListItem>)
+        <input type="submit" value="Save" />
+    }
+    else{
+        <p>There are no flavors available</p>
+    }
+}
+
+@Html.ActionLink("Back to list", "Index")

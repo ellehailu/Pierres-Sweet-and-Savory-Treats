@@ -8,4 +8,5 @@
 <h2>@Html.DisplayNameFor(m=>m.Name): @Html.DisplayFor(m=>m.Name)</h2>
 
 @Html.ActionLink("Edit flavor", "Edit", new { id = Model.FlavorId})<br>
-@Html.ActionLink("Delete flavor", "Delete", new { id = Model.FlavorId}) 
+@Html.ActionLink("Delete flavor", "Delete", new { id = Model.FlavorId})
+@Html.ActionLink("Add treat", "AddTreat", new { id = Model.FlavorId })
