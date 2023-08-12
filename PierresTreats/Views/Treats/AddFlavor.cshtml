@@ -11,7 +11,7 @@
 
     @Html.Label("Select a flavor")
 
-    @if (ViewBag.FlavorId != null && ((IEnumerable<SelectListItem>)ViewBag.TreatId).Any())
+    @if (ViewBag.FlavorId != null && ((IEnumerable<SelectListItem>)ViewBag.FlavorId).Any())
     {
         @Html.Label("Select flavor")
         @Html.DropDownList("FlavorId", ViewBag.FlavorId as IEnumerable<SelectListItem>)

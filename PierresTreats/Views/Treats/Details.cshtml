@@ -8,11 +8,23 @@
 <h2>Treat details</h2>
 <hr/>
 <h3>@Html.DisplayNameFor(m=>m.Name): @Html.DisplayFor(m=>m.Name)</h3>
-<h4>Allergens: @Html.DisplayFor(m=>m.Allergens)</h4>
+@if(@Model.JoinEntities.Count == 0){
+    <p>This treat has no flavor options</p>
+}
+else{
+    <h5>Flavor choices: </h5>
+    <ul>
+        @foreach (TreatFlavor join in Model.JoinEntities){
+            <li>@join.Flavor.Name</li>
+        }
+    </ul>
+}
 </div>
 
-@Html.ActionLink("Back to treat list", "Index")<br>
+<div class="footer">
+    @Html.ActionLink("Back to treat list", "Index")<br>
 @Html.ActionLink("Edit treat", "Edit", new { id = Model.TreatId })<br>
-@Html.ActionLink("Delete treat", "Delete", new { id = Model.TreatId})
+@Html.ActionLink("Delete treat", "Delete", new { id = Model.TreatId})<br>
+@Html.ActionLink("Add flavor", "AddFlavor", new { id = Model.TreatId })</div>
 
 

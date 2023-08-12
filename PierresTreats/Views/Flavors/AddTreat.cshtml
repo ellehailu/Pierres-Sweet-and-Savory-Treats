@@ -5,15 +5,14 @@
 @model PierresTreats.Models.Flavor;
 
 @using (Html.BeginForm()){
-    @Html.HiddenFor(m=>m.FlavorId)
+    @Html.HiddenFor(m => m.FlavorId)
 
-    @if(ViewBag.TreatId != null && ((IEnumerable<SelectListItem>)ViewBag.TreatId).Any()){
+    @if (ViewBag.TreatId != null && ((IEnumerable<SelectListItem>)ViewBag.TreatId).Any()) 
+    {
         @Html.Label("Select treat")
         @Html.DropDownList("TreatId", ViewBag.TreatId as IEnumerable<SelectListItem>)
         <input type="submit" value="Save"/>
-    }
-
-    else{
+    } else {
         <p>There are no treats available</p>
     }
 }

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
+
+#nullable enable
 namespace PierresTreats.Controllers
 {
     [Authorize]
@@ -29,24 +31,29 @@ namespace PierresTreats.Controllers
 
         public ActionResult Create()
         {
+            ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
             return View();
         }
 
         [HttpPost]
         public ActionResult Create(Treat treat)
         {
-            //Model state validation
-            if (ModelState.IsValid)
-            {
-                _db.Treats.Add(treat);
-                _db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
-                return View(treat);
-            }
+            // if (!ModelState.IsValid)
+            // {
+            //     ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
+            //     return View();
+            // }
+
+            // else
+            // {
+            //     _db.Treats.Add(treat);
+            //     _db.SaveChanges();
+            //     return RedirectToAction("Index");
+            // }
+
+            _db.Treats.Add(treat);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         public ActionResult Details(int id)

@@ -7,6 +7,20 @@
 @model PierresTreats.Models.Flavor
 <h2>@Html.DisplayNameFor(m=>m.Name): @Html.DisplayFor(m=>m.Name)</h2>
 
+@if(@Model.JoinEntities.Count == 0){
+    <p>There are no treats associated with this flavor</p>
+}
+
+else{
+    <h3>Treats associated with this flavor</h3>
+    <ul>
+        @foreach (TreatFlavor join in Model.JoinEntities){
+            <li>@join.Treat.Name</li>
+        }
+    </ul>
+}
+
+@Html.ActionLink("Back to list", "Index")<br>
 @Html.ActionLink("Edit flavor", "Edit", new { id = Model.FlavorId})<br>
-@Html.ActionLink("Delete flavor", "Delete", new { id = Model.FlavorId})
+@Html.ActionLink("Delete flavor", "Delete", new { id = Model.FlavorId})<br>
 @Html.ActionLink("Add treat", "AddTreat", new { id = Model.FlavorId })

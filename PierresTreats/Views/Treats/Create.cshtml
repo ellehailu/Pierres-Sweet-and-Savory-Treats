@@ -9,9 +9,13 @@
     <h1>Add a new treat</h1>
     <label for="Name">Treat name</label>
     @Html.TextBoxFor(m=>m.Name)<br>
+    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", @style = "font-weight: 600;" })    
+
 //Add checkboxes
     <label for="Allergens">Allergens</label>
     @Html.TextBoxFor(m=>m.Allergens)<br>
+    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", @style = "font-weight: 600;" })
+
     <input type="submit" value="Add"/>
 }
 
